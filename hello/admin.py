@@ -22,7 +22,7 @@ class AccntAdmin(admin.ModelAdmin):
         return False
 
     def has_change_permission(self, request,obj=None):
-       return True
+       return False
     
 ac_site=accAdmin(name='Administration')
 ac_site.register(Account,AccntAdmin)
@@ -35,8 +35,10 @@ def application_approval(self, request, queryset):
                 send_mail('Application Approved', mail_cont ,'roadwayexpressscy@gmail.com' , [i.email], fail_silently=False)
                 queryset.update(mail_send=True)         
                 queryset.update(approval=True)
-                
-               
+                pas=i.pass_id
+                obj=Account.objects.get(pass_id=pas)
+                obj.reject=False
+                obj.save()
                 if i.caste=='SC' or i.caste=='ST':
                     queryset.update(bus_amount=200)
                 elif i.caste=='OBC':
@@ -50,12 +52,30 @@ def application_reject(self, request, queryset):
         mail_cont='Dear applicant,your application for bus pass has been Rejected. Please submit a valid proof.'
         for i in queryset:
             if i.approval==False:
-                send_mail('Application Rejected', mail_cont ,'roadwayexpressscy@gmail.com' , [i.email], fail_silently=False)
                 pas=i.pass_id
                 obj=Account.objects.get(pass_id=pas)
-                obj.reject=True
-                obj.save()
-                i.delete()
+                username=obj.username
+                try:
+                    obj2=Transaction.objects.get(username=username).status
+                except Transaction.DoesNotExist:
+                    obj2="none"
+
+                if obj2!='Renew':
+                    send_mail('Application Rejected', mail_cont ,'roadwayexpressscy@gmail.com' , [i.email], fail_silently=False)
+                    queryset.update(mail_send=True)
+                    obj.reject=True
+                    obj.pass_id='0'
+                    obj.save()
+                    i.delete()
+                else:
+                    send_mail('Application Rejected', mail_cont ,'roadwayexpressscy@gmail.com' , [i.email], fail_silently=False)
+                    queryset.update(mail_send=True)
+                    obj.reject=True
+                    
+                    obj.save()
+                    #obj2.delete()
+                    
+
                 
         application_approval.short_description = "Application Reject"
 

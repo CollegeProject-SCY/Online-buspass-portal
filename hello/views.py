@@ -252,49 +252,29 @@ def about_us(request):
 
 @login_required
 def apply(request):
-    email=request.user.email
-    try:
-        print('inner')
-        rej=Account.objects.get(email=email).reject
-        if rej==True:
-            print('2')
-            obj=Account.objects.get(email=email)
-            obj.pass_id='0'
-            obj.save()
-            current=request.user.pass_id
-            print(current)
-        else:
-            print('1')
-            current=request.user.pass_id
-            print(current)
-        '''
-        email=request.user.email
-        print('current')
-        current=applicants.objects.get(email=email).pass_id
-        if current=='0':
-            obj=Account.objects.get(email=email)
-            obj.pass_id='0'
-            obj.save()
-            print('updated')'''
-    except Account.DoesNotExist:
-        current=request.user.pass_id
-        '''if(current>0):
-            obj=Account.objects.get(email=email)
-            obj.pass_id='0'
-            obj.save()
+    #email=request.user.email
+    #try:
+        #print('inner')
+        #rej=Account.objects.get(email=email).reject
+        #amt=applicants.objects.get(email=email).bus_amount
+        #if rej==True:
+            #if amt==0:
+                #print('2')
+                #obj=Account.objects.get(email=email)
+                #obj.pass_id='0'
+                #obj.save()
+                #current=request.user.pass_id
+                #print(current)
+            #else:
+                #return render(request,'success.html',{'please_renew':'please_renew'})
+        #else:
         
-        obj=Account.objects.gepass/bin/python
-Python Version:	3.8.10
-Python Path:	
-['/home/yuvaraj/project/webpages/college',
- '/usr/lib/python38.zip',
- '/usr/lib/python3.8',
- '/usr/lib/python3.8/lib-dynload',
- '/home/yuvaraj/bus-pass/lib/python3.8/site-packages']
-Server time:	Tue, 21 Sep 2021 11:19:55 +0530t(pass_id=pas)
-        obj.pass_id='0'
-        obj.save()'''
+        #current=request.user.pass_id
+       
         
+    #except Account.DoesNotExist:
+    current=request.user.pass_id
+       
         
     if(current == '0'):
         print('cur')
@@ -305,17 +285,7 @@ Server time:	Tue, 21 Sep 2021 11:19:55 +0530t(pass_id=pas)
         return render(request,'success.html',{'your_already_applied':current})
 
 def view(request):
-    '''account_sid = 'AC13bcf30480722a98c888b8d7f39d92bd' 
-    auth_token = 'aaf692d3b55c655b6e3ed16608f8f266' 
-    phone=str(9663585029)
-    client = Client(account_sid, auth_token) 
-    message = client.messages.create(  
-                                messaging_service_sid='MG7b8f86e6946c32ae3229d0859b794d89', 
-                                body='OTP from RoadwayExpress . Your OTP will expire with in after 3 minutes.',      
-                                to='+91'+phone
-                            ) 
-    
-    print(message.sid)'''
+   
     pass_amts=pass_rate.objects.all()
     dests=Route.objects.all()
     return render(request,'view.html',{'dests':dests, 'pass_amts':pass_amts})
@@ -325,37 +295,51 @@ def renewal(request):
     try:
         current=request.user.pass_id
         username=request.user.username
+        rej=Account.objects.get(username=username).reject
         try:
             expire_date=Transaction.objects.get(username=username).expire_date
             status=Transaction.objects.get(username=username).status
         except Transaction.DoesNotExist:
-            status=None
-            expire_date=None
-            return render(request,'success.html',{'application_not_approved_ren':'application_not_approved_ren'})
+                print('00')
+                status=None
+                expire_date=None
+                return render(request,'success.html',{'application_not_approved_ren':'application_not_approved_ren'})
         obj=applicants.objects.get(pass_id=current).approval
-        rej=Account.objects.get(pass_id=current).reject
-        if rej:
-            return render(request,'success.html',{'application_rejected':'application_rejected'})
+        
+        
+        if obj==False:
+            if status=='Renew':
+                return render(request,'renewal.html')
         else:
             if status=='Renew':
+                print(',llll')
                 return render(request,'success.html',{'under_renew':'under_renew'})
             else:
+                print(',00')
                 if obj:    
-                    
+                    print('00')
                     today=date.today()
                     if(current == '0'):
+                        print('04')
                         return render(request,'success.html',{'your_not_applied_renw':'your_not_applied_renw'})
                     else:
+                    
                         if(today < expire_date):
+                            
                             messages.info(request, 'Your pass validity not ended') 
                             return redirect(home)
 
                         else:
+                            print('00')
+                            #if rej==True:
                             return render(request,'renewal.html')
                 else:
+                    print('00')
                     return render(request,'success.html',{'application_not_approved_renw':'application_not_approved_renw'})      
     except applicants.DoesNotExist:
+        print('00')
         obj=None
+        
         return render(request,'success.html',{'application_not_submitted_ren':'application_not_submitted_ren'})
 
 
@@ -371,7 +355,7 @@ def generate(request):
         except Transaction.DoesNotExist:
             status=None
             expire_date=None
-            return render(request,'success.html',{'application_not_approved':'application_not_approved'})
+            return render(request,'success.html',{'Payment_pending':'Payment_pending'})
         obj=applicants.objects.get(pass_id=current).approval
         rej=Account.objects.get(pass_id=current).reject
         if obj:
@@ -493,7 +477,7 @@ def contact_form(request):
          message=request.POST['messages']
          data = contact_list(username=username, email=email, phone=phone, messages=message)
          try:
-            send_mail('Thank You For Contact Us', 'Your request as been reached .We will try to sortout your query soon.' ,'roadwayexpressscy@gmail.com' , [email], fail_silently=False)
+            send_mail('Thank You For Contact Us', 'Your request as been reached .We will try to sortout your query soon.' ,'YuvarajKharvi4111@gmail.com' , [email], fail_silently=False)
          except socket.gaierror:
             return render(request,'internet_error.html')
          data.save()
@@ -560,47 +544,55 @@ def apply_form(request):
         obj.save(update_fields=['pass_id'])
         obj.save(update_fields=['reject'])
         application.save() 
-        messages.info(request, 'application submitted') 
+        messages.info(request, 'Application Submitted') 
         return redirect('home')
 
 @login_required
 @requires_csrf_token
 def renewal_fun(request):
-    if request.method =='POST':
-        username=request.user.username
-        pay_obj=Transaction.objects.get(username=username)
-        email=request.POST['email']
-        year=request.POST['year']
-        fee_amount=request.POST['fee_amount']
-        from_stop=request.POST['from_stop']
-        to_stop=request.POST['to_stop']
-        previous = request.FILES['previousYear']
-        study_cert=request.FILES['reciept']
-        reciept=request.FILES['study']
-        obj=applicants.objects.get(email=email)
-        #applicants.objects.filter(email=email).update(study_certificate_image=study_cert)
-        obj.study_certificate_image=study_cert
-        obj.previous_marks_image=previous
-        obj.college_fees_image=reciept
-        obj.save(update_fields=['study_certificate_image'])
-        obj.save(update_fields=['previous_marks_image'])
-        obj.save(update_fields=['college_fees_image'])
-        obj.college_fee_amt=fee_amount
-        obj.year=year
-        obj.from_stop=from_stop
-        obj.to_stop=to_stop
-        obj.approval=False
-        obj.mail_send=False
-        obj.bus_amount=0
-        pay_obj.status='Renew'
-        path=MEDIA_ROOT + "/receipt/" + obj.pass_id+".pdf"
-        os.remove(path)
-        print(path)
+    try:
+        if request.method =='POST':
+            username=request.user.username
+            pay_obj=Transaction.objects.get(username=username)
+            email=request.POST['email']
+            year=request.POST['year']
+            fee_amount=request.POST['fee_amount']
+            from_stop=request.POST['from_stop']
+            to_stop=request.POST['to_stop']
+            previous = request.FILES['previousYear']
+            study_cert=request.FILES['reciept']
+            reciept=request.FILES['study']
+            obj=applicants.objects.get(email=email)
+            #applicants.objects.filter(email=email).update(study_certificate_image=study_cert)
+            obj.study_certificate_image=study_cert
+            obj.previous_marks_image=previous
+            obj.college_fees_image=reciept
+            obj.save(update_fields=['study_certificate_image'])
+            obj.save(update_fields=['previous_marks_image'])
+            obj.save(update_fields=['college_fees_image'])
+            obj.college_fee_amt=fee_amount
+            obj.year=year
+            obj.from_stop=from_stop
+            obj.to_stop=to_stop
+            obj.approval=False
+            obj.mail_send=False
+            obj.bus_amount=0
+            pay_obj.status='Renew'
+            path=MEDIA_ROOT + "/receipt/" + obj.pass_id+".pdf"
+            os.remove(path)
+        
+            obj.save()
+            pay_obj.save()
+            
+            messages.info(request, 'Application Submitted') 
+            return redirect('home')
+    except FileNotFoundError:
         obj.save()
         pay_obj.save()
         
-        messages.info(request, 'renewal') 
+        messages.info(request, 'Application Submitted') 
         return redirect('home')
+
 
 from django.contrib.auth import authenticate, login as auth_login
 from django.conf import settings
