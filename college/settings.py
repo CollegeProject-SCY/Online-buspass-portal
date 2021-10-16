@@ -155,10 +155,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST= 'smtp.gmail.com'
 EMAIL_PORT=587
-EMAIL_HOST_USER='roadwayexpressscy@gmail.com'
+EMAIL_HOST_USER='enter your email id'
 EMAIL_USE_TLS=True
 EMAIL_USE_SSL=False
-EMAIL_HOST_PASSWORD="413541114130"
+EMAIL_HOST_PASSWORD="enter your password here"
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 #SESSION_COOKIE_AGE = 3*60
