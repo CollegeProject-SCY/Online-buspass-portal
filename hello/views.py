@@ -37,16 +37,7 @@ from django.contrib.auth.forms import PasswordResetForm,SetPasswordForm
 from django.contrib.auth.views import PasswordResetConfirmView
 from twilio.rest import Client
 
-    
-'''
 
-twillio 
-student
-tq-edu-bc0v28gb7
-game
-GHEDUSWAG
-
-'''
 
 
 # Create your views here.
@@ -84,16 +75,16 @@ def register(request):
         print(otp)
         mail='Dear, '+username+' Please verify your Email By entering Below otp '+otp+ '. Your OTP will expire with in after 3 minutes.'
         send_mail('OTP', mail ,'roadwayexpressscy@gmail.com' , [email], fail_silently=False)
-        '''account_sid = 'AC13bcf30480722a98c888b8d7f39d92bd' 
-        auth_token = 'aaf692d3b55c655b6e3ed16608f8f266' 
+        account_sid = 'your twilio account sid' 
+        auth_token = 'your twilio auth token' 
         client = Client(account_sid, auth_token) 
         message = client.messages.create(  
-                                    messaging_service_sid='MG7b8f86e6946c32ae3229d0859b794d89', 
+                                    messaging_service_sid='your twilio messaging service sid', 
                                     body='OTP from RoadwayExpress '+otp+'. Your OTP will expire with in after 3 minutes.',      
                                     to='+91'+phone
                                 ) 
         
-        print(message.sid)'''
+        print(message.sid)
     except socket.gaierror:
     #except socket.error:
     #except socket.timeout:
@@ -128,18 +119,16 @@ def resend(request):
     try:
         mail='Dear, '+username+' Please verify your Email By entering Below otp '+otp+ '. Your OTP will expire with in after 3 minutes.'
         send_mail('Email Verification', mail ,'roadwayexpressscy@gmail.com' , [email], fail_silently=False)
-        '''
-        account_sid = 'AC13bcf30480722a98c888b8d7f39d92bd' 
-        auth_token = 'aaf692d3b55c655b6e3ed16608f8f266' 
+        account_sid = 'your twilio account sid' 
+        auth_token = 'your twilio auth token' 
         client = Client(account_sid, auth_token) 
-        
         message = client.messages.create(  
-                                    messaging_service_sid='MG7b8f86e6946c32ae3229d0859b794d89', 
+                                    messaging_service_sid='your twilio messaging service sid', 
                                     body='OTP from RoadwayExpress '+otp+'. Your OTP will expire with in after 3 minutes.',      
                                     to='+91'+phone
                                 ) 
         
-        print(message.sid)'''
+        print(message.sid)
         request.session['otp']=otp
         request.session['otp_time']=otp_time
     except socket.gaierror:
