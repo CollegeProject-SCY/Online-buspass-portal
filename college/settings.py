@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'college.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'buspass',
+        'NAME': 'databasename',
         'USER': 'root',
-        'PASSWORD': 'yuvarajkharvi',
+        'PASSWORD': 'yourdatabasepswrd',
         'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': { "init_command": "SET foreign_key_checks = 0;", } 
@@ -124,8 +124,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-PAYTM_MERCHANT_ID = 'Ztanbx42738781439498'
-PAYTM_SECRET_KEY = 'HERn7FFw%QXSzw@v'
+PAYTM_MERCHANT_ID = 'Your_paytm_merchant_id'
+PAYTM_SECRET_KEY = 'Your_paytm_secret_key'
 PAYTM_WEBSITE = 'WEBSTAGING'
 PAYTM_CHANNEL_ID = 'WEB'
 PAYTM_INDUSTRY_TYPE_ID = 'Retail'
