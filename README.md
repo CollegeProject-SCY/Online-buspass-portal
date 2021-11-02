@@ -26,12 +26,12 @@ The key components of Online Student Bus Pass Portal are <br>
 Front end: HTML, CSS, Bootstrap, JavaScript
 Backend: python
 
-1.6 Hardware and Software Requirements:
-	1.6.1 Hardware Requirements: 
-Processor: Intel Pentium 4 or above
-RAM: 4GB
-Hard Disk :40GB
-	1.6.2 Software Interface:
-Database: MySQL
-Framework: Django
-Tools used (OS): windows XP and above
+Hardware and Software Requirements:
+	 Hardware Requirements: 
+                Processor: Intel Pentium 4 or above
+                RAM: 4GB
+                Hard Disk :40GB
+	Software Interface:
+                Database: MySQL
+                Framework: Django
+                Tools used (OS): windows XP and above
