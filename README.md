@@ -65,7 +65,7 @@ This command is used for creating super user (Admin)
 <b><h3>Admin Page</h3></b>
 ![](screenshot/admin.jpeg)
 
-<h3><b>More reference <a href="https://docs.djangoproject.com/en/3.2/" target="_blank">click here.</a></b></h3>
+<h3><b>More reference <a href="https://docs.djangoproject.com/en/3.2/" target="_blank" >click here.</a></b></h3>
 
 <code><img width="15%" src="https://www.vectorlogo.zone/logos/djangoproject/djangoproject-ar21.svg"></code>
 <code><img width="15%" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg"></code>
