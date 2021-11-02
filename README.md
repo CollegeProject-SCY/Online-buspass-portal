@@ -43,7 +43,7 @@ Python manage.py migrate
 
 <i><b>Template:</i></b><br> A template consists of static parts of the desired HTML output as well as some special syntax describing how dynamic content will be inserted
 
-<hr>
+
 
 ```diff
 python manage.py make migrations
@@ -64,6 +64,12 @@ This command is used for creating super user (Admin)
 
 <b><h3>Admin Page</h3></b>
 ![](screenshot/admin.jpeg)
+
+```diff
+Python manage.py runserver
+```
+
+It used to run a emulated server on your local computer. So, after running it, you can go to [localhost:8000](http://localhost:8000) or [127.0.0.1:8000](http://127.0.0.1:8000)
 
 <h3><b>More reference <a href="https://docs.djangoproject.com/en/3.2/" target="_blank" >click here.</a></b></h3>
 
