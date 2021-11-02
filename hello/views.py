@@ -97,18 +97,7 @@ def register(request):
     request.session['otp_time']=otp_time
     
     return render(request,'otp.html',{'email':email})
-"""
-phone=request.POST['phone']
-password1=request.POST['password']
-encpass=password1+'zzz'
-user_obj =Account.objects.create(username=username, phone=phone, email=email, password=encpass)
-user_obj.set_password(encpass)
-user_obj.save()
-messages.info(request, 'Account Created Successfully :)')  
-print(' user created '+username) 
-return redirect('loged_in')
 
-  """
 import socket
 def resend(request):
     username=request.session['username']
@@ -241,27 +230,7 @@ def about_us(request):
 
 @login_required
 def apply(request):
-    #email=request.user.email
-    #try:
-        #print('inner')
-        #rej=Account.objects.get(email=email).reject
-        #amt=applicants.objects.get(email=email).bus_amount
-        #if rej==True:
-            #if amt==0:
-                #print('2')
-                #obj=Account.objects.get(email=email)
-                #obj.pass_id='0'
-                #obj.save()
-                #current=request.user.pass_id
-                #print(current)
-            #else:
-                #return render(request,'success.html',{'please_renew':'please_renew'})
-        #else:
-        
-        #current=request.user.pass_id
-       
-        
-    #except Account.DoesNotExist:
+    
     current=request.user.pass_id
        
         
@@ -800,9 +769,7 @@ def receipt(request,context,pass_id):
     html = HTML(string=html_string, base_url='request.build_absolute_uri()')
     result = html.write_pdf(presentational_hints=True)
     # Creating http response
-    """response = HttpResponse(content_type='application/pdf;')
-    response['Content-Disposition'] = 'inline; filename=examform.pdf'
-    response['Content-Transfer-Encoding'] = 'UTF-8'"""
+    
     with tempfile.NamedTemporaryFile(delete=True) as output:
         output.write(result)
         output.flush()
@@ -818,9 +785,7 @@ def download_pass(request):
             pass_id=usr.pass_id
         except NameError:
             pass_id=request.user.pass_id
-        '''context['bton']=False
-        context['pdf']=True
-        print(context['bton'])'''
+       
         download_obj=applicants.objects.get(pass_id=pass_id)
         file_name=download_obj.pass_id+".pdf"
         response = FileResponse(open(MEDIA_ROOT + "/receipt/" + file_name, 'rb')) 
@@ -829,13 +794,7 @@ def download_pass(request):
         messages.info(request, 'Payment Not Completed!') 
         return redirect(home)
     #session error usr
-    '''
-     delete from hello_transaction where id>10;
-    [01/Sep/2021 20:51:56] "POST /pay/ HTTP/1.1" 200 1288
-{'received': {'CURRENCY': ['INR'], 'GATEWAYNAME': ['WALLET'], 'RESPMSG': ['Txn Success'], 'BANKNAME': ['WALLET'], 'PAYMENTMODE': ['PPI'], 'MID': ['Ztanbx42738781439498'], 'RESPCODE': ['01'], 'TXNID': ['20210901111212800110168438402932891'], 'TXNAMOUNT': ['340.00'], 'ORDERID': ['ROADWAY38971'], 'STATUS': ['TXN_SUCCESS'], 'BANKTXNID': ['65219189'], 'TXNDATE': ['2021-09-01 20:51:57.0'], 'CHECKSUMHASH': ['YItBYpWdTcCFwmSnUoDrbDHE7JuHIFkAPDnB92uFYis0/P1RuMOqc0/lpsL4kHO3eNmTzS1nVrv5WYllfXeE7Xr9TqzN+VKxm80QV0LtTFA=']}, 'ORDERID': 'ROADWAY38971', 'category': 'SC/ST', 'amount': '00.00', 'total': '120', 'usr': <SimpleLazyObject: <Account: yuvarajkharvi4111@gmail.com pbkdf2_sha256$260000$GROWglQykoCavjw1XDzKvM$tDOGWTxuPHv0Flu9NOKdHBETTpC6oqoEyr1RHUK5fmY=>>}
-/home/yuvaraj/project/webpages/college/hello/views.py changed, reloading.
-Watching for file changes with StatReloader
-    '''
+    
 def bus_pass(request,context,pass_id,expire_date):
     #expire_date=timezone.now().date() + timedelta(days=365)
     receipt_obj=applicants.objects.get(pass_id=pass_id)
