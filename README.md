@@ -71,6 +71,8 @@ Python manage.py runserver
 
 It used to run a emulated server on your local computer. So, after running it, you can go to [localhost:8000](http://localhost:8000) or [127.0.0.1:8000](http://127.0.0.1:8000)
 
+<b><h4>Generate pass Page:</h4></b>
+Allows student to generate their pass after approval and payment for pass
 <h3><b>More reference <a href="https://docs.djangoproject.com/en/3.2/" target="_blank" >click here.</a></b></h3>
 
 <code><img width="15%" src="https://www.vectorlogo.zone/logos/djangoproject/djangoproject-ar21.svg"></code>
