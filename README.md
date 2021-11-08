@@ -3,8 +3,8 @@
 <b>Online Student Bus Pass Portal is a web application for students to get bus passes through online. 
 Before this application implementation the manual process is used to do the process of issuing the Bus pass to the students. This Manual process requires man power and more time consuming. To avoid such difficulties, we implemented this system.
 The key components of Online Student Bus Pass Portal are <br>
- 1)Bus pass generation  <br>
- 2)Bus pass renewal</b>
+ 1)Bus pass Generation  <br>
+ 2)Bus pass Renewal</b>
  <hr>
  
  <b><h3>Home Page</h3></b>
