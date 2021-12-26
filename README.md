@@ -68,6 +68,15 @@ This command is used for creating super user (Admin)
 ```diff
 Python manage.py runserver
 ```
+<b>Deployed active links<\b>
+Online student bus-pass portal:
+https://roadwayexpressportal.pythonanywhere.com/
+
+Personal projects-
+
+Event Creator: https://roadwayexpress.pythonanywhere.com/calendar/
+User profile:https://roadwayexpress.pythonanywhere.com/User/Login/
+
 
 It used to run a emulated server on your local computer. So, after running it, you can go to [localhost:8000](http://localhost:8000) or [127.0.0.1:8000](http://127.0.0.1:8000)
 
