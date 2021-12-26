@@ -68,7 +68,7 @@ This command is used for creating super user (Admin)
 ```diff
 Python manage.py runserver
 ```
-<b>Deployed active links<\b>
+<b>Deployed active links
 Online student bus-pass portal:
 https://roadwayexpressportal.pythonanywhere.com/
 
