@@ -41,7 +41,7 @@ from twilio.rest import Client
 
 
 # Create your views here.
-LogEntry.objects.all().delete()
+# LogEntry.objects.all().delete()
 
 def loged_in(request):
     return render(request,'index.html')
@@ -74,17 +74,17 @@ def register(request):
         otp=''.join(random.choice(string.digits) for x in range(4))
         print(otp)
         mail='Dear, '+username+' Please verify your Email By entering Below otp '+otp+ '. Your OTP will expire with in after 3 minutes.'
-        send_mail('OTP', mail ,'roadwayexpressscy@gmail.com' , [email], fail_silently=False)
+        # send_mail('OTP', mail ,'roadwayexpressscy@gmail.com' , [email], fail_silently=False)
         account_sid = 'your twilio account sid' 
         auth_token = 'your twilio auth token' 
         client = Client(account_sid, auth_token) 
-        message = client.messages.create(  
-                                    messaging_service_sid='your twilio messaging service sid', 
-                                    body='OTP from RoadwayExpress '+otp+'. Your OTP will expire with in after 3 minutes.',      
-                                    to='+91'+phone
-                                ) 
+        # message = client.messages.create(  
+        #                             messaging_service_sid='your twilio messaging service sid', 
+        #                             body='OTP from RoadwayExpress '+otp+'. Your OTP will expire with in after 3 minutes.',      
+        #                             to='+91'+phone
+        #                         ) 
         
-        print(message.sid)
+        # print(message.sid)
     except socket.gaierror:
     #except socket.error:
     #except socket.timeout:

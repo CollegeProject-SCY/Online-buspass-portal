@@ -38,3 +38,4 @@ urllib3==1.26.6
 WeasyPrint==52.5
 webencodings==0.5.1
 xhtml2pdf==0.2.5
+twilio==8.1.0
